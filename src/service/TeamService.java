@@ -46,10 +46,16 @@ public class TeamService {
         }
 
         Programmer programmer = (Programmer) employee;
-        if ("BUSY".equals(programmer.getStatus().getSTATUS())) {
-            throw new TeamException("该员工已是某团队成员");
-        } else if ("VOCATION".equals(programmer.getStatus().getSTATUS())) {
-            throw new TeamException("该员工正在休假，无法添加");
+//        if ("BUSY".equals(programmer.getStatus().getSTATUS())) {
+//            throw new TeamException("该员工已是某团队成员");
+//        } else if ("VOCATION".equals(programmer.getStatus().getSTATUS())) {
+//            throw new TeamException("该员工正在休假，无法添加");
+//        }
+        switch (programmer.getStatus()) {
+            case BUSY:
+                throw new TeamException("该员工已是某团队成员");
+            case VOCATION:
+                throw new TeamException("该员工正在休假，无法添加");
         }
 
         // 获取team已有成员中架构师，设计师，程序员的人数
